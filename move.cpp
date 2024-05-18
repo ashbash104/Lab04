@@ -31,19 +31,6 @@ Move::Move(const string & rhs) {
     capture = SPACE;
     moveType = MOVE;
     isWhite = true;
-
-    // Parse the string to extract source and destination positions
-    if (rhs.size() >= 4) {
-        // Get source position (first two characters)
-        source.setCol(rhs[0] - 'a');
-        source.setRow('8' - rhs[1]);
-
-        // Get destination position (next two characters)
-        dest.setCol(rhs[2] - 'a');
-        dest.setRow('8' - rhs[3]);
-    }
-    // Update the text representation
-    update();
 }
 
 char Move::letterFromPieceType(PieceType pt) const{
