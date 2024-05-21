@@ -2,7 +2,7 @@
  * Source File:
  *    KNIGHT
  * Author:
- *    <your name here>
+ *    Emily Raventos and Ashlee Hart
  * Summary:
  *    The knight class
  ************************************************************************/
@@ -10,6 +10,7 @@
 #include "pieceKnight.h"
 #include "board.h"
 #include "uiDraw.h"    // for draw*()
+#include <set>
 
  /***************************************************
  * PIECE DRAW
@@ -17,25 +18,47 @@
  ***************************************************/
 void Knight::display(ogstream* pgout) const
 {
-
+   pgout->drawKnight(position, !isWhite());
 }
 
+/***************************************************
+* PIECE : GEN MOVES NO SLIDE
+*         From a list of deltas, finds all the 
+*         possible moves.
+***************************************************/
+set <Move> Knight::getMovesNoslide(const Board& board, const Delta deltas[], int numDelta) const
+{
+   set <Move> moves;
+   for (int i = 0; i < numDelta; i++)
+   {
+      Position posMove(position, deltas[i]);
+   // capture if there is a piece at the end of the slide
+      if (posMove.isValid() &&
+         (board[posMove].isWhite() != fWhite || board[posMove] == SPACE))
+      {
+         Move move;
+         move.setSrc(getPosition());
+         move.setDes(posMove);
+         move.setWhiteMove(isWhite());
+         if (board[posMove] != SPACE)
+            move.setCapture(board[posMove].getType());
+         moves.insert(move);
+      }
+   }
+   return moves;
+}
 
 /**********************************************
  * KNIGHT : GET POSITIONS
  *********************************************/
 void Knight::getMoves(set <Move>& moves, const Board& board) const
 {
-   static const int dC[8] = { 2, 2, 1, -1, -2, -2, -1, 1 };
-   static const int dR[8] = { 1, -1, -2, -2, -1, 1, 2, 2 };
 
-   for (int i = 0; i < 8; i++)
+   // the 8 possible positions relative to the current position
+   const Delta delta[] = 
    {
-      ;
-      /*Position newPos(position.getCol() + dC[i], position.getRow() + dR[i]);
-      if (newPos.isValid() && (!board.isOccupied(newPos) || board.isOccupiedByOpponent(newPos, fWhite)))
-      {
-         moves.insert(Move(position, newPos, board.getPiece(newPos)));
-      }*/
-   }
+            {-1, 2}, {1, 2},
+      {-2, 1},               {2, 1},
+            {-1, -2}, {1, -2}
+   };
 }

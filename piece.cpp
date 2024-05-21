@@ -2,7 +2,7 @@
  * Source File:
  *    PIECE 
  * Author:
- *    <your name here>
+ *    Emily Raventos and Ashlee Hart
  * Summary:
  *    The Piece base class and all the derived classes:
  *       SPACE, KING, QUEEN, ROOK, KNIGHT, BISHOP, PAWN
@@ -17,6 +17,27 @@
 #include <cassert>     // because we are paranoid
 using namespace std;
 
+/************************************************
+* FACTORY
+* Create a piece
+************************************************/
+Piece * factory(PieceType pt, int c, int r, bool isWhite) {
+   switch (pt)
+   {
+      case KING:
+      case QUEEN:
+      case ROOK:
+      case BISHOP:
+      case PAWN:
+         assert(false);
+      case SPACE:
+         return new Space (c,r);
+      case KNIGHT:
+         return new Knight(c, r, isWhite);
+   }
+   assert(false);
+   return nullptr;
+}
 
 /************************************************
  * PIECE : ASSIGN
@@ -27,40 +48,8 @@ const Piece& Piece::operator=(const Piece& rhs) {
         this->fWhite = rhs.fWhite;
         this->lastMove = rhs.lastMove;
         this->nMoves = rhs.nMoves;
-        this->position = rhs.position;
     }
     return *this;
-}
-
-bool Piece::operator==(PieceType pt) const {
-    return this->getType() == pt;
-}
-
-bool Piece::operator!=(PieceType pt) const {
-    return this->getType() != pt;
-}
-
-bool Piece::isMoved() const {
-    return nMoves > 0;
-}
-
-int Piece::getNMoves() const {
-    return nMoves;
-}
-
-const Position& Piece::getPosition() const {
-    return position;
-}
-
-bool Piece::justMoved(int currentMove) const {
-    return lastMove == currentMove - 1;
-}
-
-bool Piece::isWhite() const { return fWhite; }
-
-void Piece::setLastMove(int currentMove) { 
-   lastMove = currentMove;
-   nMoves++; // Incrementing the number of moves
 }
 
 /************************************************

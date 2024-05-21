@@ -2,7 +2,7 @@
 * Source File:
 *    Lab 04: Chess
 * Author:
-*    <your name here>
+*    Ashlee Hart and Emily Raventos
 * Summary:
 *    Play the game of chess
 ************************************************************************/

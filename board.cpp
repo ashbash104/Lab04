@@ -2,7 +2,7 @@
  * Source File:
  *    BOARD 
  * Author:
- *    <your name here>
+ *    Ashlee Hart and Emily Raventos
  * Summary:
  *    A collection of pieces and a small amount of game state
  ************************************************************************/
@@ -35,10 +35,27 @@ using namespace std;
  ***********************************************/
 void Board::reset(bool fFree)
 {
+   if (fFree)
+      free();
+
    // free everything
    for (int r = 0; r < 8; r++)
       for (int c = 0; c < 8; c++)
          board[c][r] = nullptr;
+
+   // Create 4 knights for some reason
+   board[1][0] = new Knight(1, 0, true);
+   board[6][0] = new Knight(6, 0, true);
+   board[1][7] = new Knight(1, 7, true);
+   board[6][7] = new Knight(6, 7, true);
+
+   // Everything else is a space. 
+   for (int r = 0; r < 8; r++)
+      for (int c = 0; c < 8; c++)
+         if (nullptr == board[c][r])
+            board[c][r] = new Space(c, r);
+   numMoves = 0;
+   assertBoard();
 }
 
 // we really REALLY need to delete this.

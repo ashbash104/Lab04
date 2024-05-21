@@ -2,7 +2,7 @@
  * Header File:
  *    TEST MOVE 
  * Author:
- *    <your name here>
+ *    Emily Raventos and Ashlee Hart
  * Summary
  *    test the Move class
  ************************************************************************/

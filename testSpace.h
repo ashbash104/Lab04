@@ -2,7 +2,7 @@
  * Header File:
  *    TEST SPACE
  * Author:
- *    <your name here>
+ *    Emily Raventos and Ashlee Hart
  * Summary:
  *    The unit tests for the space
  ************************************************************************/

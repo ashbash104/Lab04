@@ -2,7 +2,7 @@
  * Header File:
  *    PIECE 
  * Author:
-*    <your name here>
+*    Ashlee Hart and Emily Raventos
  * Summary:
  *    The Piece base class and all the derived classes:
  *       SPACE, KING, QUEEN, ROOK, KNIGHT, BISHOP, PAWN
@@ -51,24 +51,26 @@ public:
    friend TestBoard;
    
    // constructors and stuff
-   Piece(const Position & pos, bool isWhite = true)   {}
-   Piece(int c, int r, bool isWhite = true)           {}
-   Piece(const Piece & piece)                         {}
-   virtual ~Piece()                                   {}
+   Piece(const Position & pos, bool isWhite = true) : 
+      fWhite(isWhite), nMoves(0), position(pos), lastMove(-1) { }
+   Piece(int c, int r, bool isWhite = true) :
+      fWhite(isWhite), nMoves(0), position(c,r), lastMove(-1) { }
+   Piece(const Piece & piece)    { *this = piece; }
+   virtual ~Piece()              { }
    virtual const Piece& operator = (const Piece& rhs);
 
    // getters
-   virtual bool operator == (PieceType pt) const;
-   virtual bool operator != (PieceType pt) const;
-   virtual bool isWhite()                  const;
-   virtual bool isMoved()                  const; 
-   virtual int  getNMoves()                const; 
-   virtual void decrementNMoves()                {                      }
-   virtual const Position & getPosition()  const;
-   virtual bool justMoved(int currentMove) const;
+   virtual bool operator == (PieceType pt) const { return getType() == pt; }
+   virtual bool operator != (PieceType pt) const { return getType() != pt; }
+   virtual bool isWhite()                  const { return fWhite; }
+   virtual bool isMoved()                  const { return getNMoves() != 0; }
+   virtual int  getNMoves()                const { return nMoves; }
+   virtual void decrementNMoves() { nMoves -= (nMoves > 1) ? 2 : 0; }
+   virtual const Position& getPosition()  const { return position; }
+   virtual bool justMoved(int currentMove) const { return (currentMove - 1 == lastMove); }
 
    // setter
-   virtual void setLastMove(int currentMove);
+   virtual void setLastMove(int currentMove) { lastMove = currentMove; nMoves++; }
 
    // overwritten by the various pieces
    virtual PieceType getType()                                    const = 0;
@@ -92,16 +94,12 @@ protected:
 class PieceDerived : public Piece
 {
 public:
-   PieceDerived(const Position& pos, bool isWhite) : Piece(pos, isWhite), pt(SPACE) {}
-   PieceDerived(int c, int r, bool isWhite) : Piece(c, r, isWhite), pt(SPACE) {}
-   PieceType pt;
+   PieceDerived(const Position& pos, bool isWhite) : Piece(pos, isWhite) { }
+   PieceDerived(int c, int r, bool isWhite) : Piece(c, r, isWhite)       { }
+   ~PieceDerived()                                                       { }
 
-   PieceType getType() const override { return pt; }
-   void display(ogstream* pgout) const override { assert(false); }
-   void getMoves(std::set<Move>& moves, const Board& board) const { assert(false); }
-
-   bool operator == (PieceType rhs) const override { return pt == rhs; }
-   bool operator != (PieceType rhs) const override { return pt != rhs; }
+   PieceType getType() const { return SPACE; }
+   void display(ogstream* pgout) const { assert(false); }
 };
 
 
@@ -116,11 +114,11 @@ class PieceDummy : public Piece
 public:
 
    // constructors and stuff
-   PieceDummy()                                          : Piece(0, 0, true   ) {}
-   PieceDummy(const Position & pos, bool isWhite = true) : Piece(pos,  isWhite) {}
-   PieceDummy(int c, int r, bool isWhite = true)         : Piece(c, r, isWhite) {}
-   PieceDummy(const Piece & piece)                       : Piece(0, 0, true   ) {}
-   ~PieceDummy()                                                                {}
+   PieceDummy()                                          : Piece(0, 0, true   ) { }
+   PieceDummy(const Position & pos, bool isWhite = true) : Piece(pos,  isWhite) { }
+   PieceDummy(int c, int r, bool isWhite = true)         : Piece(c, r, isWhite) { }
+   PieceDummy(const Piece & piece)                       : Piece(0, 0, true   ) { }
+   ~PieceDummy()                                                                { }
    const Piece& operator = (const Piece& rhs)
    {
      *this = rhs;;

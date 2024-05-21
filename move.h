@@ -2,7 +2,7 @@
  * Header File:
  *    MOVE
  * Author:
- *    <your name here>
+ *    Ashlee Hart and Emily Raventos
  * Summary:
  *    Everything we need to know about a single chess move
  ************************************************************************/
@@ -33,8 +33,8 @@ public:
    Move();
    Move(const string & rhs);
   
-   void read(const string & rhs) {}
-   string getText() const { return std::string(""); }
+   void read(const string & rhs);
+   string getText() const;
    // getters
    //string getText()                 const;
    const Position& getDes()         const { return dest; }

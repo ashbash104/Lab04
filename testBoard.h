@@ -2,7 +2,7 @@
  * Header File:
  *    TEST BOARD
  * Author:
- *    <your name here>
+ *    Emily Raventos and Ashlee Hart
  * Summary:
  *    The unit tests for Board
  ************************************************************************/

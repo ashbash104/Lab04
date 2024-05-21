@@ -2,7 +2,7 @@
  * Header File:
  *    SPACE
  * Author:
- *    <your name here> 
+ *    Ashlee Hart and Emily Raventos 
  * Summary:
  *    The space
  ************************************************************************/
