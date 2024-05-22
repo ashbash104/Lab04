@@ -11,7 +11,8 @@
 #include "pieceKnight.h"     
 #include "board.h"
 #include "uiDraw.h"
-#include <cassert>      
+#include <cassert> 
+using namespace std;
 
  /*************************************
   * +---a-b-c-d-e-f-g-h---+
@@ -27,7 +28,7 @@
   * |                     |
   * +---a-b-c-d-e-f-g-h---+
   **************************************/
-void TestKnight::getMoves_end()
+void TestKnight::getMoves_end() ////////////////////////////////
 {
    // SETUP
    BoardEmpty board;
@@ -113,7 +114,7 @@ void TestKnight::getMoves_blocked()
  * |                     |
  * +---a-b-c-d-e-f-g-h---+
  **************************************/
-void TestKnight::getMoves_capture()
+void TestKnight::getMoves_capture() ////////////////////////////////
 {
    // SETUP
    BoardEmpty board;
@@ -164,7 +165,7 @@ void TestKnight::getMoves_capture()
  * |                     |
  * +---a-b-c-d-e-f-g-h---+
  **************************************/
-void TestKnight::getMoves_free()
+void TestKnight::getMoves_free() ////////////////////////////////
 {
    // SETUP
    BoardEmpty board; 
@@ -179,6 +180,7 @@ void TestKnight::getMoves_free()
 
    // VERIFY
    assertUnit(moves.size() == 8);
+   cout << "Line 181: Size: " << moves.size() << endl;
    assertUnit(moves.find(Move("d5b6")) != moves.end());
    assertUnit(moves.find(Move("d5c7")) != moves.end());
    assertUnit(moves.find(Move("d5e7")) != moves.end());
