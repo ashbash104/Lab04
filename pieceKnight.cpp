@@ -60,8 +60,9 @@ void Knight::getMoves(set <Move>& moves, const Board& board) const
    {
             {-1, 2}, {1, 2},
       {-2, 1},               {2, 1},
+      {-2, 1},               {2, 1},
             {-1, -2}, {1, -2}
    };
 
-   // moves = getMovesNoslide(board, delta, sizeof(delta) /*/ sizeof(delta[0]))*/);
+    //moves = getMovesNoslide(board, delta, sizeof(delta) / sizeof(delta[0]));
 }

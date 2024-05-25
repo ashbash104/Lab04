@@ -1,10 +1,10 @@
 /***********************************************************************
  * Header File:
- *    KNIGHT
+ *    Pawn
  * Author:
 *    Ashlee Hart & Emily Raventos
  * Summary:
- *    The KNIGHT class
+ *    The Pawn class
  ************************************************************************/
 
 #pragma once
@@ -12,18 +12,17 @@
 #include "piece.h"
 
  /***************************************************
-  * KNIGHT
-  * The knight, aka the "Horse"
+  * Pawn
+  * The Pawn
   ***************************************************/
-class Knight : public Piece
+class Pawn : public Piece
 {
 public:
-   Knight(const Position& pos, bool isWhite) : Piece(pos, isWhite) { }
-   Knight(int c, int r, bool isWhite) : Piece(c, r, isWhite) { }
-   ~Knight() {                }
-   PieceType getType()            const { return KNIGHT; }
+   Pawn(const Position& pos, bool isWhite) : Piece(pos, isWhite) { }
+   Pawn(int c, int r, bool isWhite) : Piece(c, r, isWhite) { }
+   ~Pawn() {                }
+   PieceType getType()            const { return PAWN; }
    void getMoves(set <Move>& moves, const Board& board) const;
    void display(ogstream* pgout)  const;
-private:
    set <Move> getMovesNoslide(const Board& board, const Delta deltas[], int numDelta) const;
 };

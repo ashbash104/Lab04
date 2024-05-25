@@ -1,14 +1,14 @@
 
 /***********************************************************************
  * Source File:
- *    Bishop
+ *    Rook
  * Author:
  *    Emily Raventos and Ashlee Hart
  * Summary:
  *    The bishop class
  ************************************************************************/
 
-#include "pieceBishop.h"
+#include "pieceRook.h"
 #include "board.h"
 #include "uiDraw.h"    // for draw*()
 #include <set>
@@ -18,23 +18,23 @@
  * PIECE DRAW
  * Draw all the pieces.
  ***************************************************/
-void Bishop::display(ogstream* pgout) const
+void Rook::display(ogstream* pgout) const
 {
-   pgout->drawBishop(position, !isWhite());
+   pgout->drawRook(position, !isWhite());
 }
 
 /***************************************************
 * PIECE : GEN MOVES NO SLIDE
-*         From a list of deltas, finds all the
+*         From a list of deltas, finds all the 
 *         possible moves.
 ***************************************************/
-set <Move> Bishop::getMovesNoslide(const Board& board, const Delta deltas[], int numDelta) const
+set <Move> Rook::getMovesNoslide(const Board& board, const Delta deltas[], int numDelta) const
 {
    set <Move> moves;
    for (int i = 0; i < numDelta; i++)
    {
       Position posMove(position, deltas[i]);
-      // capture if there is a piece at the end of the slide
+   // capture if there is a piece at the end of the slide
       if (posMove.isValid() &&
          (board[posMove].isWhite() != fWhite || board[posMove] == SPACE))
       {
@@ -51,17 +51,18 @@ set <Move> Bishop::getMovesNoslide(const Board& board, const Delta deltas[], int
 }
 
 /**********************************************
- * BISHOP : GET POSITIONS
+ * KNIGHT : GET POSITIONS
  *********************************************/
-void Bishop::getMoves(set <Move>& moves, const Board& board) const
+void Rook::getMoves(set <Move>& moves, const Board& board) const
 {
 
    // the 8 possible positions relative to the current position
-   const Delta delta[] =
+   const Delta delta[] = 
    {
-            {-1,  1}, {1,  1},
-            {-1, -1}, {1, -1}
+                  {0,  1},
+         {-1, 0},         {1, 0},
+                  {0, -1}
    };
 
-   //moves = getMovesNoslide(board, delta, sizeof(delta) /*/ sizeof(delta[0]))*/);
+   // moves = getMovesNoslide(board, delta, sizeof(delta) /*/ sizeof(delta[0]))*/);
 }

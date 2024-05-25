@@ -83,7 +83,8 @@ public:
    Position  getHoverPosition()    const { return posHover; }
    Position  getPreviousPosition() const { return posSelectPrevious; }
 
-   void setSelectPosition(const Position& pos)
+   void setSelectPosition(const Position& pos)  // Only diff from lab 1 is thid takes pos obj
+                                                // instead of int pos. 
    {
       if (pos != posSelect)
          posSelectPrevious = posSelect;

@@ -1,10 +1,10 @@
 /***********************************************************************
  * Header File:
- *    KNIGHT
+ *    King
  * Author:
 *    Ashlee Hart & Emily Raventos
  * Summary:
- *    The KNIGHT class
+ *    The King class
  ************************************************************************/
 
 #pragma once
@@ -12,18 +12,17 @@
 #include "piece.h"
 
  /***************************************************
-  * KNIGHT
-  * The knight, aka the "Horse"
+  * King
+  * The King
   ***************************************************/
-class Knight : public Piece
+class King : public Piece
 {
 public:
-   Knight(const Position& pos, bool isWhite) : Piece(pos, isWhite) { }
-   Knight(int c, int r, bool isWhite) : Piece(c, r, isWhite) { }
-   ~Knight() {                }
-   PieceType getType()            const { return KNIGHT; }
+   King(const Position& pos, bool isWhite) : Piece(pos, isWhite) { }
+   King(int c, int r, bool isWhite) : Piece(c, r, isWhite) { }
+   ~King() {                }
+   PieceType getType()            const { return KING; }
    void getMoves(set <Move>& moves, const Board& board) const;
    void display(ogstream* pgout)  const;
-private:
    set <Move> getMovesNoslide(const Board& board, const Delta deltas[], int numDelta) const;
 };

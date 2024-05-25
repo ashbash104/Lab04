@@ -454,6 +454,7 @@ void TestMove::getText_castleKing()
 	// exercise 
 	s = move.getText();
 	// verify
+	cout << "castleKing text: -------------------> " << s << endl;
 	assertUnit(s == string("e1g1c"));
 	assertUnit(0x40 == move.source.colRow);
 	assertUnit(0x60 == move.dest.colRow);

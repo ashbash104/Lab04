@@ -85,33 +85,6 @@ void draw(const char* board, const Interface & ui, const set <int> & possible)
       }
 }
 
-/*********************************************
- * MOVE 
- * Execute one movement. Return TRUE if successful
- *********************************************/
-//bool move(char* board, int positionFrom, int positionTo)
-//{
-//   // do not move if a move was not indicated
-//   if (positionFrom == -1 || positionTo == -1)
-//      return false;
-//   assert(positionFrom >= 0 && positionFrom < 64);
-//   assert(positionTo >= 0 && positionTo < 64);
-//
-//
-//   // find the set of possible moves from our current location
-//   set <int> possiblePrevious = getPossibleMoves(board, positionFrom);
-//
-//   // only move there is the suggested move is on the set of possible moves
-//   if (possiblePrevious.find(positionTo) != possiblePrevious.end())
-//   {
-//      board[positionTo] = board[positionFrom];
-//      board[positionFrom] = ' ';
-//      return true;
-//   }
-//
-//   return false;
-//
-//}
 
 /*************************************
  * All the interesting work happens here, when
@@ -127,16 +100,16 @@ void callBack(Interface *pUI, void * p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    char * board = (char *)p;  
-
-   // move 
+   //Move move; 
+   //// move 
    //if (move(board, pUI->getPreviousPosition(), pUI->getSelectPosition()))
-      //pUI->clearSelectPosition();
+   //   pUI->clearSelectPosition();
    //else
-      //possible = getPossibleMoves(board, pUI->getSelectPosition());
+   //   possible = getMoves(board, pUI->getSelectPosition());
 
-   // if we clicked on a blank spot, then it is not selected
+   //// if we clicked on a blank spot, then it is not selected
    //if (pUI->getSelectPosition() != -1 && board[pUI->getSelectPosition()] == ' ')
-      //pUI->clearSelectPosition();
+   //   pUI->clearSelectPosition();
 
    // draw the board
    draw(board, *pUI, possible);
