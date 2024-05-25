@@ -1,41 +1,40 @@
-/***********************************************************************
- * Header File:
- *    TEST BISHOP
- * Author:
- *    <your name here>
- * Summary:
- *    The unit tests for the bishop
- ************************************************************************/
+ /***********************************************************************
+  * Header File:
+  *    TEST BISHOP
+  * Author:
+  *    <your name here>
+  * Summary:
+  *    The unit tests for the bishop
+  ************************************************************************/
 
-#pragma once
+ #pragma once
 
 
-#include "unitTest.h"
+ #include "unitTest.h"
+  /***************************************************
+   * BISHOP TEST
+   * Test the BISHOP class
+   ***************************************************/
+ class TestBishop : public UnitTest
+ {
+ public:
 
-/***************************************************
- * BISHOP TEST
- * Test the BISHOP class
- ***************************************************/
-class TestBishop : public UnitTest
-{
-public:
+    void run()
+    {
+       getMoves_blocked();
+       getMoves_slideToEnd();
+       getMoves_slideToBlock();
+       getMoves_slideToCapture();
 
-   void run()
-   {
-      getMoves_blocked();
-      getMoves_slideToEnd();
-      getMoves_slideToBlock();
-      getMoves_slideToCapture();
+       getType();
 
-      getType();
-      
-      report("Bishop");
-   }
-private:
-   void getMoves_blocked();
-   void getMoves_slideToEnd();
-   void getMoves_slideToBlock();
-   void getMoves_slideToCapture();
-   void getType();
-};
+       report("Bishop");
+    }
+ private:
+    void getMoves_blocked();
+    void getMoves_slideToEnd();
+    void getMoves_slideToBlock();
+    void getMoves_slideToCapture();
+    void getType();
+ };
 

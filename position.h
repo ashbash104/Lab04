@@ -58,7 +58,7 @@ public:
    bool operator <  (const Position& rhs) const { return colRow < rhs.colRow; }
    bool operator == (const Position& rhs) const; // { return true; } // We define these 2 in the .cpp
    bool operator != (const Position& rhs) const; // { return true; }
-   const Position& operator =  (const Position& rhs) { return colRow = rhs.colRow;  }
+   const Position& operator =  (const Position& rhs) { return colRow = rhs.colRow;  } // This returns address of temporary variable?
 
    // Location : The Position class can work with locations, which
    //            are 0...63 where we start in row 0, then row 1, etc.
