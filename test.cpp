@@ -55,5 +55,5 @@ void testRunner()
    TestPiece().run();
    TestSpace().run();
    TestKnight().run();
-   //TestBishop().run();
+   TestBishop().run();
 }
