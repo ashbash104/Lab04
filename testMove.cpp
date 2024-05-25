@@ -43,15 +43,13 @@ void TestMove::constructString_simple()
 {
    // setup
 	Move move("e5e6");
-	//cout << move.source.colRow << endl;
-	//cout << move.dest.colRow << endl;
 	// verify
 	assertUnit(0x44 == move.source.colRow);
 	assertUnit(0x45 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
 	assertUnit(SPACE == move.capture);
 	assertUnit(Move::MOVE == move.moveType);
-	assertUnit(true == move.isWhite);
+	assertUnit(false == move.isWhite);
 }
 
 
@@ -203,9 +201,9 @@ void TestMove::read_castleQueen()
 /*************************************
  * ASSIGN simple move
  * Input:  e5e6
- * Output: source=4,0
- *         dest  =2,0
- *         type  =CASTLE_QUEEN
+ * Output: source=4,4
+ *         dest  =4,5
+ *         type  =MOVE
  **************************************/
 void TestMove::assign_simple()
 {
@@ -216,17 +214,18 @@ void TestMove::assign_simple()
 	move.promote = KNIGHT;
 	move.capture = BISHOP;
 	move.moveType = Move::MOVE_ERROR;
-	move.isWhite = true;
+	move.isWhite = false;
 	move.text = "ERROR";
 	// exercise
 	move = string("e5e6");
 	// verify
-	assertUnit(0x40 == move.source.colRow);
-	assertUnit(0x20 == move.dest.colRow);
+	assertUnit(0x44 == move.source.colRow);
+	assertUnit(0x45 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
 	assertUnit(SPACE == move.capture);
 	assertUnit(Move::MOVE == move.moveType);
-	assertUnit(true == move.isWhite);}
+	assertUnit(false == move.isWhite);
+}
 
 /*************************************
  * ASSIGN capture move
@@ -261,7 +260,7 @@ void TestMove::assign_capture()
  * ASSIGN enpassant move
  * Input:  e5d6E
  * Output: source=4,4
- *         dest  =5,5
+ *         dest  =3,5
  *         type  =ENPASSANT
  **************************************/
 void TestMove::assign_enpassant()
@@ -278,7 +277,7 @@ void TestMove::assign_enpassant()
 	move = string("e5d6E");
 	// verify
 	assertUnit(0x44 == move.source.colRow);
-	assertUnit(0x55 == move.dest.colRow);
+	assertUnit(0x35 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
 	assertUnit(SPACE == move.capture);
 	assertUnit(Move::ENPASSANT == move.moveType);
@@ -308,15 +307,15 @@ void TestMove::assign_castleKing()
 	assertUnit(0x40 == move.source.colRow);
 	assertUnit(0x60 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
-	assertUnit(ROOK == move.capture);
+	assertUnit(SPACE == move.capture);
 	assertUnit(Move::CASTLE_KING == move.moveType);
-	assertUnit(true == move.isWhite);}
+	assertUnit(false == move.isWhite);}
 
 /*************************************
  * ASSIGN queen side castle
  * Input:  e1g1C
  * Output: source=4,0
- *         dest  =2,0
+ *         dest  =6,0
  *         type  =CASTLE_QUEEN
  **************************************/
 void TestMove::assign_castleQueen()
@@ -333,11 +332,11 @@ void TestMove::assign_castleQueen()
 	// exercise
 	move = string("e1g1C");
 	// verify
-	assertUnit(0x44 == move.source.colRow);
-	assertUnit(0x35 == move.dest.colRow);
+	assertUnit(0x40 == move.source.colRow);
+	assertUnit(0x60 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
-	assertUnit(ROOK == move.capture);
-	assertUnit(Move::MOVE == move.moveType);
+	assertUnit(SPACE == move.capture);
+	assertUnit(Move::CASTLE_QUEEN == move.moveType);
 	assertUnit(false == move.isWhite);}
 
 /*************************************

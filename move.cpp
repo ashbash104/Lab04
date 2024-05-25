@@ -31,18 +31,7 @@ Move::Move()
 }
 
 Move::Move(const string & rhs) {
-    source.set(rhs[0] - 'a', rhs[1]);
-    dest.set(rhs[2] - 'a', rhs[3]);
-
-    promote = SPACE;
-    if (rhs.size() > 4) {
-        capture = pieceTypeFromLetter(rhs[4]);
-    }
-    else {
-        capture = SPACE;
-    }
-    moveType = MOVE;
-    isWhite = true;
+    read(rhs);
 }
 
 char Move::letterFromPieceType(PieceType pt) const{
@@ -103,6 +92,7 @@ string Move::getText() const {
 }
 
 void Move::read(const std::string& moveStr) {
+
     // Reset to defaults
     source.set(0,0);
     dest.set(0,0);
@@ -162,4 +152,5 @@ void Move::read(const std::string& moveStr) {
             return;
         }
     }
+
 }
