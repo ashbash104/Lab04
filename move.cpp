@@ -31,8 +31,16 @@ Move::Move()
 }
 
 Move::Move(const string & rhs) {
+    source.set(rhs[0] - 'a', rhs[1]);
+    dest.set(rhs[2] - 'a', rhs[3]);
+
     promote = SPACE;
-    capture = SPACE;
+    if (rhs.size() > 4) {
+        capture = pieceTypeFromLetter(rhs[4]);
+    }
+    else {
+        capture = SPACE;
+    }
     moveType = MOVE;
     isWhite = true;
 }
@@ -70,14 +78,14 @@ string Move::getText() const {
     string dCol = colLetter[dest.getCol()];
     int dRow = dest.getRow() + 1;
 
-    string moveText = sCol + to_string(sRow) + dCol + to_string(dRow);
     Board board;
 
-    string mType = " ";
+    string mType = "";
 
-    if (moveType == MOVE && board.isOccupiedByOpponent(dest, isWhite)) {
-        char mType = letterFromPieceType(capture);
-        moveText += mType;
+    if (moveType == MOVE && capture != SPACE && capture != INVALID) {
+        char mType1 = tolower(letterFromPieceType(capture));
+        string s{ mType1 };
+        mType = s;
     }
     else if (moveType == ENPASSANT) {
         mType = "E";
@@ -89,30 +97,69 @@ string Move::getText() const {
         mType = "C";
     }
 
-    moveText += mType;
-
-    // // Check if the destination contains an opponent's piece
-    // if (capture != ' ') {
-    //    moveText += capture;
-    // }
+    string moveText = sCol + to_string(sRow) + dCol + to_string(dRow) + mType;
 
     return moveText;
 }
 
-void Move::read(const string & rhs) {
-    // Check if the string has at least two characters
-      if (rhs[0] && rhs[1] && rhs[2]) {
-         // Extract column and row from the string
-         int col = rhs[0] /* - 'a'*/; // Assuming lowercase letters for columns ('a' -> 0, 'b' -> 1, ..., 'h' -> 7)
-         int row = rhs[1]/* - '1'*/; // Assuming '1' -> 0, '2' -> 1, ..., '8' -> 7
+void Move::read(const std::string& moveStr) {
+    // Reset to defaults
+    source.set(0,0);
+    dest.set(0,0);
+    promote = SPACE;
+    capture = SPACE;
+    moveType = MOVE;
+    isWhite = false;
+    text = moveStr;
 
-         // Check if column and row values are within valid range
-         if (col >= 0 && col < 8 && row >= 0 && row < 8) { 
-            // Set the colRow value
-            dest.setCol(col << 4);
-            dest.setRow(row);  
-            
-            static_cast<uint8_t>((col << 4) | row); 
-         }
-      }
+    if (moveStr.size() < 4) {
+        moveType = MOVE_ERROR;
+        return;
+    }
+
+    // Parse the move string
+    source.setCol(moveStr[0] - 'a');
+    source.setRow(moveStr[1] - '1');
+    dest.setCol(moveStr[2] - 'a');
+    dest.setRow(moveStr[3] - '1');
+
+    // Default to MOVE
+    moveType = MOVE;
+
+    // Determine if it's a special move
+    if (moveStr.size() == 5) {
+        char special = moveStr[4];
+        switch (special) {
+        case 'r':  // Capture
+            capture = ROOK;
+            break;
+        case 'b':
+            capture = BISHOP;
+            break;
+        case 'n':
+            capture = KNIGHT;
+            break;
+        case 'q':
+            capture = QUEEN;
+            break;
+        case 'k':
+            capture = KING;
+            break;
+        case 'p':
+            capture = PAWN;
+            break;
+        case 'E':  // En passant
+            moveType = ENPASSANT;
+            break;
+        case 'c':  // King-side castle
+            moveType = CASTLE_KING;
+            break;
+        case 'C':  // Queen-side castle
+            moveType = CASTLE_QUEEN;
+            break;
+        default:
+            moveType = MOVE_ERROR;
+            return;
+        }
+    }
 }

@@ -112,6 +112,7 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testBishop.cpp" />
     <ClCompile Include="testBoard.cpp" />
+    <ClCompile Include="testKing.cpp" />
     <ClCompile Include="testKnight.cpp" />
     <ClCompile Include="testMove.cpp" />
     <ClCompile Include="testPawn.cpp" />

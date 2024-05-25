@@ -43,6 +43,8 @@ void TestMove::constructString_simple()
 {
    // setup
 	Move move("e5e6");
+	//cout << move.source.colRow << endl;
+	//cout << move.dest.colRow << endl;
 	// verify
 	assertUnit(0x44 == move.source.colRow);
 	assertUnit(0x45 == move.dest.colRow);
@@ -72,7 +74,7 @@ void TestMove::read_simple()
 	move.isWhite = false;
 	move.text = "ERROR";
 	// exercise
-	move.read("e5d6");
+	move.read("e5e6");
 	// verify
 	assertUnit(0x44 == move.source.colRow);
 	assertUnit(0x45 == move.dest.colRow);
@@ -107,7 +109,7 @@ void TestMove::read_capture()
 	assertUnit(0x44 == move.source.colRow);
 	assertUnit(0x45 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
-	assertUnit(SPACE == move.capture);
+	assertUnit(ROOK == move.capture);
 	assertUnit(Move::MOVE == move.moveType);
 	assertUnit(false == move.isWhite);
    }
@@ -173,7 +175,7 @@ Move move;
  * READ queen side castle
  * Input:  e1g1C
  * Output: source=4,0
- *         dest  =2,0
+ *         dest  =6,0
  *         type  =CASTLE_QUEEN
  **************************************/
 void TestMove::read_castleQueen()
@@ -188,10 +190,10 @@ void TestMove::read_castleQueen()
 	move.isWhite = false;
 	move.text = "ERROR";
 	// exercise
-	move.read(string("e5e6"));
+	move.read(string("e1g1C"));
 	// verify
 	assertUnit(0x40 == move.source.colRow);
-	assertUnit(0x20 == move.dest.colRow);
+	assertUnit(0x60 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
 	assertUnit(SPACE == move.capture);
 	assertUnit(Move::CASTLE_QUEEN == move.moveType);
@@ -392,6 +394,7 @@ void TestMove::getText_capture()
 	string s;
 	// exercise 
 	s = move.getText();
+
 	// verify
 	assertUnit(s == string("e5e6r"));
 	assertUnit(0x44 == move.source.colRow);
@@ -416,19 +419,20 @@ void TestMove::getText_enpassant()
 	move.source.colRow = 0x44;
 	move.dest.colRow = 0x45;
 	move.promote = SPACE;
-	move.capture = SPACE;
+	move.capture = PAWN;
 	move.moveType = Move::ENPASSANT;
 	move.isWhite = true;
 	move.text = "";
 	string s;
 	// exercise 
 	s = move.getText();
+
 	// verify
-	assertUnit(s == string("e5f6E"));
+	assertUnit(s == string("e5e6E"));
 	assertUnit(0x44 == move.source.colRow);
 	assertUnit(0x45 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
-	assertUnit(SPACE == move.capture);
+	assertUnit(PAWN == move.capture);
 	assertUnit(Move::ENPASSANT == move.moveType);
 	assertUnit(true == move.isWhite);}
 
@@ -454,7 +458,6 @@ void TestMove::getText_castleKing()
 	// exercise 
 	s = move.getText();
 	// verify
-	cout << "castleKing text: -------------------> " << s << endl;
 	assertUnit(s == string("e1g1c"));
 	assertUnit(0x40 == move.source.colRow);
 	assertUnit(0x60 == move.dest.colRow);
@@ -483,13 +486,14 @@ void TestMove::getText_castleQueen()
 	string s;
 	// exercise 
 	s = move.getText();
+
 	// verify
 	assertUnit(s == string("e1c1C"));
-	assertUnit(0x44 == move.source.colRow);
-	assertUnit(0x45 == move.dest.colRow);
+	assertUnit(0x40 == move.source.colRow);
+	assertUnit(0x20 == move.dest.colRow);
 	assertUnit(SPACE == move.promote);
 	assertUnit(SPACE == move.capture);
-	assertUnit(Move::ENPASSANT == move.moveType);
+	assertUnit(Move::CASTLE_QUEEN == move.moveType);
 	assertUnit(true == move.isWhite);
 }
 

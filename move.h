@@ -28,18 +28,6 @@ class Move
 public:
    enum MoveType { MOVE, ENPASSANT, CASTLE_KING, CASTLE_QUEEN, MOVE_ERROR };
 
-   // std::string move_to_string(MoveType moveType) {
-   //  switch (moveType) {
-   //      case MoveType::MOVE: return "m";
-   //      case MoveType::ENPASSANT: return "E";
-   //      case MoveType::CASTLE_KING: return "c";
-   //      case MoveType::CASTLE_QUEEN: return "C";
-   //      case MoveType::MOVE_ERROR: return "error";
-   //      default: return "Unknown";
-   //    }
-   // }
-
-
    // constructor
    Move();
    Move(const string & rhs);

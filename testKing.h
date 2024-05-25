@@ -2,7 +2,7 @@
   * Header File:
   *    TEST King
   * Author:
-  *    <your name here>
+  *    <Ashlee Hart and Emily Raventos
   * Summary:
   *    The unit tests for the King
   ************************************************************************/

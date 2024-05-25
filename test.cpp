@@ -54,10 +54,10 @@ void testRunner()
    PositionTest().run();
    TestMove().run();
    //TestBoard().run();
-   // TestPiece().run();
-   // TestSpace().run();
-   // TestKnight().run();
-   // TestBishop().run();
-   // TestPawn().run();
-   // TestRook().run();
+    TestPiece().run();
+    TestSpace().run();
+    TestKnight().run();
+    TestBishop().run();
+    TestPawn().run();
+    TestRook().run();
 }

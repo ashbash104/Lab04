@@ -2,7 +2,7 @@
   * Header File:
   *    TEST Queen
   * Author:
-  *    <your name here>
+  *    Ashlee Hart and Emily Raventos
   * Summary:
   *    The unit tests for the Queen
   ************************************************************************/
