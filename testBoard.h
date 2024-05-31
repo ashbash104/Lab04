@@ -20,55 +20,7 @@
  class TestBoard : public UnitTest
  {
  public:
-    void run()
-    {
-       move_knightMove();
-       move_knightAttack();
-       // construct
-       construct_default();
-
-       // move
-       move_pawnSimple();
-       move_pawnCapture();
-       move_pawnDouble();
-       move_pawnEnpassant();
-       move_pawnPromotion();
-       move_rookSlide();
-       move_rookAttack();
-       move_bishopSlide();
-       move_bishopAttack();
-       move_knightMove();
-       move_knightAttack();
-       move_queenSlide();
-       move_queenAttack();
-       move_kingMove();
-       move_kingAttack();
-       move_kingShortCastle();
-       move_kingLongCastle();
-
-       // Get Current Move
-       getCurrentMove_initial();
-       getCurrentMove_second();
-       getCurrentMove_middleWhite();
-       getCurrentMove_middleBlack();
-
-       // Whites Turn?
-       whiteTurn_initial();
-       whiteTurn_second();
-       whiteTurn_middleWhite();
-       whiteTurn_middleBlack();
-
-       // fetch and get
-       fetch_a1();
-       fetch_h8();
-       fetch_a8();
-       set_a1();
-       set_h8();
-       set_a8();
-
-      
-       report("Board");
-    }
+     void run();
  private:
     void move_knightMove();
     void move_knightAttack();
@@ -93,8 +45,8 @@
     void move_rookAttack();
     void move_bishopSlide();
     void move_bishopAttack();
-    // void move_knightMove();
-    // void move_knightAttack();
+    //void move_knightMove();
+    //void move_knightAttack();
     void move_queenSlide();
     void move_queenAttack();
     void move_kingMove();
@@ -108,7 +60,6 @@
     void set_a1();
     void set_h8();
     void set_a8();
-
  };
 
 
